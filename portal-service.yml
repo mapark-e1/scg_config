@@ -8,8 +8,14 @@ spring:
       hibernate:
         jdbc:
           time_zone: UTC
+    hibernate:
+      ddl-auto: validate
 
 logging:
   level:
     com.arcus.portal: INFO
+
+portal:
+  cors:
+    allowed-origins: http://localhost:3000,http://localhost:4173,http://localhost:5173,http://portal-web:4173
 
