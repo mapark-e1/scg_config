@@ -1,0 +1,18 @@
+api:
+  id: sample-service
+  name: Sample Service API
+  owner: platform-team
+  swaggerUrl: https://raw.githubusercontent.com/mapark-e1/sample-ms/master/swagger.yaml
+  gateway:
+    basePath: /sample
+    serviceId: SAMPLE-SERVICE
+    predicates:
+      - Path=/sample/**
+    filters:
+      - StripPrefix=1
+      - name: RequestRateLimiter
+        args:
+          redis-rate-limiter.replenishRate: 5
+          redis-rate-limiter.burstCapacity: 10
+          key-resolver: '#{@clientIpKeyResolver}'
+

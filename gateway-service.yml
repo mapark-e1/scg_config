@@ -1,0 +1,54 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: CircuitBreaker
+          args:
+            name: platformDefaultCircuit
+        - name: Retry
+          args:
+            retries: 2
+            backoff:
+              firstBackoff: 100ms
+              maxBackoff: 1000ms
+              factor: 2
+      routes:
+        - id: sample-service
+          uri: lb://SAMPLE-SERVICE
+          predicates:
+            - Path=/sample/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: '#{@clientIpKeyResolver}'
+  redis:
+    host: ${SPRING_REDIS_HOST:redis}
+    port: ${SPRING_REDIS_PORT:6379}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI:http://keycloak:8080/realms/arcus}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://discovery-service:8761/eureka/}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      platformDefaultCircuit:
+        slidingWindowSize: 20
+        failureRateThreshold: 60
+        waitDurationInOpenState: 10s
+  ratelimiter:
+    instances:
+      platformDefaultRateLimiter:
+        limitForPeriod: 10
+        limitRefreshPeriod: 1s
+        timeoutDuration: 0
+
