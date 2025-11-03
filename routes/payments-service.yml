@@ -1,0 +1,12 @@
+api:
+  id: payments-service
+  name: Payments API
+  owner: finance-team
+  swaggerUrl: http://swagger-catalog-service:8090/specs/raw/payments-service
+  gateway:
+    basePath: /payments
+    serviceId: PAYMENTS-SERVICE
+    predicates:
+      - Path=/payments/**
+    filters:
+      - StripPrefix=1

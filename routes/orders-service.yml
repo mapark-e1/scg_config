@@ -1,0 +1,12 @@
+api:
+  id: orders-service
+  name: Orders API
+  owner: sales-team
+  swaggerUrl: http://swagger-catalog-service:8090/specs/raw/orders-service
+  gateway:
+    basePath: /orders
+    serviceId: ORDERS-SERVICE
+    predicates:
+      - Path=/orders/**
+    filters:
+      - StripPrefix=1

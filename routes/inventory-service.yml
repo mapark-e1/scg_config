@@ -1,0 +1,12 @@
+api:
+  id: inventory-service
+  name: Inventory API
+  owner: warehouse-team
+  swaggerUrl: http://swagger-catalog-service:8090/specs/raw/inventory-service
+  gateway:
+    basePath: /inventory
+    serviceId: INVENTORY-SERVICE
+    predicates:
+      - Path=/inventory/**
+    filters:
+      - StripPrefix=1

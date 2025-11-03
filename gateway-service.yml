@@ -24,6 +24,24 @@ spring:
                 redis-rate-limiter.replenishRate: 10
                 redis-rate-limiter.burstCapacity: 20
                 key-resolver: '#{@clientIpKeyResolver}'
+        - id: payments-service
+          uri: lb://PAYMENTS-SERVICE
+          predicates:
+            - Path=/payments/**
+          filters:
+            - StripPrefix=1
+        - id: orders-service
+          uri: lb://ORDERS-SERVICE
+          predicates:
+            - Path=/orders/**
+          filters:
+            - StripPrefix=1
+        - id: inventory-service
+          uri: lb://INVENTORY-SERVICE
+          predicates:
+            - Path=/inventory/**
+          filters:
+            - StripPrefix=1
   redis:
     host: ${SPRING_REDIS_HOST:redis}
     port: ${SPRING_REDIS_PORT:6379}
@@ -31,7 +49,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI:http://keycloak:8080/realms/arcus}
+          jwk-set-uri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI:http://keycloak:8080/realms/arcus/protocol/openid-connect/certs}
 
 eureka:
   client:
