@@ -20,4 +20,11 @@ portal:
     allowed-origins: http://localhost:3000,http://localhost:4173,http://localhost:5173,http://portal-web:4173
   security:
     jwk-set-uri: http://keycloak:8080/realms/arcus/protocol/openid-connect/certs
-
+  keycloak:
+    base-url: http://keycloak:8080
+    auth-realm: master
+    management-realm: arcus
+    client-id: admin-cli
+    client-secret: ""
+    admin-username: admin
+    admin-password: admin
