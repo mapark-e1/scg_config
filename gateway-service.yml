@@ -12,36 +12,6 @@ spring:
               firstBackoff: 100ms
               maxBackoff: 1000ms
               factor: 2
-      routes:
-        - id: sample-service
-          uri: lb://SAMPLE-SERVICE
-          predicates:
-            - Path=/sample/**
-          filters:
-            - StripPrefix=1
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
-                key-resolver: '#{@clientIpKeyResolver}'
-        - id: payments-service
-          uri: lb://PAYMENTS-SERVICE
-          predicates:
-            - Path=/payments/**
-          filters:
-            - StripPrefix=1
-        - id: orders-service
-          uri: lb://ORDERS-SERVICE
-          predicates:
-            - Path=/orders/**
-          filters:
-            - StripPrefix=1
-        - id: inventory-service
-          uri: lb://INVENTORY-SERVICE
-          predicates:
-            - Path=/inventory/**
-          filters:
-            - StripPrefix=1
   redis:
     host: ${SPRING_REDIS_HOST:redis}
     port: ${SPRING_REDIS_PORT:6379}
@@ -70,3 +40,6 @@ resilience4j:
         limitRefreshPeriod: 1s
         timeoutDuration: 0
 
+gateway:
+  routes:
+    path: ${GATEWAY_ROUTES_PATH:/config-repo/routes}
