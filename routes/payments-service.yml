@@ -14,5 +14,5 @@ api:
     filters:
     - "StripPrefix=1"
     security:
-      authType: "CLIENT_ID"
+      authType: "BASIC"
       requiredScopes: []

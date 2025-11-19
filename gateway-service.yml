@@ -15,11 +15,6 @@ spring:
   redis:
     host: ${SPRING_REDIS_HOST:redis}
     port: ${SPRING_REDIS_PORT:6379}
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI:http://keycloak:8080/realms/arcus/protocol/openid-connect/certs}
 
 eureka:
   client:
