@@ -8,7 +8,7 @@ api:
   gateway:
     basePath: "/inventory"
     serviceId: "INVENTORY-SERVICE"
-    enabled: false
+    enabled: true
     predicates:
     - "Path=/inventory/**"
     filters:
