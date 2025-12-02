@@ -16,6 +16,13 @@ spring:
     host: ${SPRING_REDIS_HOST:redis}
     port: ${SPRING_REDIS_PORT:6379}
 
+management:
+  metrics:
+    web:
+      server:
+        request:
+          matching-strategy: ant_path_matcher
+
 eureka:
   client:
     service-url:
@@ -36,5 +43,10 @@ resilience4j:
         timeoutDuration: 0
 
 gateway:
+  telemetry:
+    metrics-enabled: true
+    traces-enabled: true
+    traces-endpoint: http://analytics-collector:4317
+    metrics-url: http://analytics-collector:4318/v1/metrics
   routes:
     path: ${GATEWAY_ROUTES_PATH:/config-repo/routes}
