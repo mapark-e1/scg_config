@@ -2,13 +2,13 @@
 api:
   id: "payments-service"
   name: "결제 API"
-  description: "결제 승인, 정산, 환불을 관리하는 API입니다."
+  description: "결제 승인, 환불 등 결제 처리를 담당하는 서비스"
   owner: "payments-team"
-  swaggerUrl: "http://localhost:8090/specs/raw/payments-service"
+  swaggerUrl: "https://msa-repository.com/specs/raw/payments-service"
   gateway:
     basePath: "/payments"
     serviceId: "PAYMENTS-SERVICE"
-    enabled: true
+    enabled: false
     predicates:
     - "Path=/payments/**"
     filters:
