@@ -8,7 +8,7 @@ api:
   gateway:
     basePath: "/payments"
     serviceId: "PAYMENTS-SERVICE"
-    enabled: true
+    enabled: false
     predicates:
     - "Path=/payments/**"
     filters:
