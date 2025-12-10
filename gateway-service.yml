@@ -35,6 +35,11 @@ resilience4j:
         slidingWindowSize: 20
         failureRateThreshold: 60
         waitDurationInOpenState: 10s
+  timelimiter:
+    instances:
+      platformDefaultCircuit:
+        timeoutDuration: 180s
+        cancelRunningFuture: true
   ratelimiter:
     instances:
       platformDefaultRateLimiter:
