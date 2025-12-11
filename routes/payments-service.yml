@@ -7,7 +7,7 @@ api:
   swaggerUrl: "https://msa-repository.com/specs/raw/payments-service"
   gateway:
     basePath: "/payments"
-    serviceId: "http://payments.service.com/payments"
+    serviceId: "http://payments-service.rep-msa:8101/payments"
     enabled: true
     predicates:
     - "Path=/payments/**"
