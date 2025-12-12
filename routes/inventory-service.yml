@@ -8,7 +8,7 @@ api:
   gateway:
     basePath: "/inventory"
     serviceId: "http://inventory-service.rep-msa:8103/inventory"
-    enabled: true
+    enabled: false
     predicates:
     - "Path=/inventory/**"
     filters:
