@@ -1,0 +1,18 @@
+---
+api:
+  id: "inventory-service"
+  name: "재고 조회 및 보충을 담당하는 서비스"
+  description: "주문 생성 및 상태 관리를 위한 API입니다."
+  owner: "inventory-team"
+  swaggerUrl: "https://msa-repository.com/specs/raw/inventory-service"
+  gateway:
+    basePath: "/inventory"
+    serviceId: "http://inventory-service.rep-msa:8103/inventory"
+    enabled: false
+    predicates:
+    - "Path=/inventory/**"
+    filters:
+    - "StripPrefix=1"
+    security:
+      authType: "OAUTH2"
+      requiredScopes: []
